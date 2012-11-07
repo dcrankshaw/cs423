@@ -60,7 +60,10 @@ def run_tests():
     attrqueries.append('"select * from threexthreeoverlap valnum = 8589934788;"')
     attrqueries.append('"select * from fivexfive where valnum = 8589934788;"')
     attrqueries.append('"select * from fivexfiveoverlap where valnum = 8589934788;"')
+    for q in attrqueries:
+        do_query(q, true)
 
+#window aggregate queries
 windowqueries = []
     windowqueries.append('"select avg(valnum) from twoxtwo fixed window as (partition by i 5 preceding and 5 following, j 5 preceding and 5 following);"');
     windowqueries.append('"select avg(valnum) from twoxtwo fixed window as (partition by i 5 preceding and 5 following, j 5 preceding and 5 following);"');
@@ -76,9 +79,27 @@ windowqueries = []
     windowqueries.append('"select avg(valnum) from fivexfive fixed window as (partition by i 0 preceding and 2 following, j 0 preceding and 2 following, k 0 preceding and 2 following, l 0 preceding and 2 following, m 0 preceding and 2 following);"');
     windowqueries.append('"select avg(valnum) from fivexfiveoverlap fixed window as (partition by i 1 preceding and 1 following, j 1 preceding and 1 following, k 1 preceding and 1 following, l 1 preceding and 1 following, m 1 preceding and 1 following);"');
     windowqueries.append('"select avg(valnum) from fivexfiveoverlap fixed window as (partition by i 0 preceding and 2 following, j 0 preceding and 2 following, k 0 preceding and 2 following, l 0 preceding and 2 following, m 0 preceding and 2 following);"');
+    for q in windowqueries:
+        do_query(q, true)
 
-    
+#group by queries
+    groupqueries = []
+    groupqueries.append('"select max(valnum) from twoxtwo where j < 10 group by j;"');
+    groupqueries.append('"select max(valnum) from twoxtwooverlap where j < 10 group by j;"');
+    groupqueries.append('"select max(valnum) from twoxtwo where i < 10 group by i;"');
+    groupqueries.append('"select max(valnum) from twoxtwooverlap where i < 10 group by i;"');
 
+    groupqueries.append('"select max(valnum) from threexthree where k < 10 group by k;"');
+    groupqueries.append('"select max(valnum) from threexthreeoverlap where k < 10 group by k;"');
+    groupqueries.append('"select max(valnum) from threexthree where i < 10 group by i;"');
+    groupqueries.append('"select max(valnum) from threexthreeoverlap where i < 10 group by i;"');
+
+    groupqueries.append('"select max(valnum) from fivexfive where m < 10 group by m;"');
+    groupqueries.append('"select max(valnum) from fivexfiveoverlap where m < 10 group by m;"');
+    groupqueries.append('"select max(valnum) from fivexfive where i < 10 group by i;"');
+    groupqueries.append('"select max(valnum) from fivexfiveoverlap where i < 10 group by i;"');
+    for q in groupqueries:
+        do_query(q, true)
 
 if __name__=='__main__':
     run_tests()
