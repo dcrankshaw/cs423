@@ -3,10 +3,6 @@
 from subprocess import Popen, PIPE
 from time import time
 
-no_overlap_arrays = ['twoxtwo', 'threexthree', 'fivexfive']
-overlap_arrays = ['twoxtwooverlap', 'threexthreeoverlap', 'fivexfiveoverlap']
-
-
 def do_query(query, aql):
 #    print query
     timestart = time()
@@ -29,39 +25,43 @@ def run_tests():
     selectqueries.append('"select * from fivexfiveoverlap where i=1 and j=1 and k = 1 and l = 1 and m = 1;"')
     for q in selectqueries:
         do_query(q, True)
+    print 'finished select queries'
 
 #cube range queries
     cubequeries = []
-    cubequeries.append('"between(twoxtwo, 0, 0, 1000, 1000"')
-    cubequeries.append('"between(twoxtwooverlap, 0, 0, 1000, 1000"')
-    cubequeries.append('"between(threexthree, 0, 0, 0, 80, 80, 80"')
-    cubequeries.append('"between(threexthreeoverlap, 0, 0, 0, 80, 80, 80"')
-    cubequeries.append('"between(fivexfive, 0, 0, 0, 0, 0, 8, 8, 8, 8, 8"')
-    cubequeries.append('"between(fivexfiveoverlap, 0, 0, 0, 0, 0, 8, 8, 8, 8, 8"')
+    cubequeries.append('"between(twoxtwo, 0, 0, 1000, 1000);"')
+    cubequeries.append('"between(twoxtwooverlap, 0, 0, 1000, 1000);"')
+    cubequeries.append('"between(threexthree, 0, 0, 0, 80, 80, 80);"')
+    cubequeries.append('"between(threexthreeoverlap, 0, 0, 0, 80, 80, 80);"')
+    cubequeries.append('"between(fivexfive, 0, 0, 0, 0, 0, 8, 8, 8, 8, 8);"')
+    cubequeries.append('"between(fivexfiveoverlap, 0, 0, 0, 0, 0, 8, 8, 8, 8, 8);"')
     for q in cubequeries:
         do_query(q, False)
+    print 'finished cube queries'
 
 #slice range queries
     slicequeries = []
-    slicequeries.append('"between(twoxtwo, 0, 0, 32, 32"')
-    slicequeries.append('"between(twoxtwooverlap, 0, 0, 32, 32"')
-    slicequeries.append('"between(threexthree, 0, 0, 0, 0, 32, 32"')
-    slicequeries.append('"between(threexthreeoverlap, 0, 0, 0, 0, 32, 32"')
-    slicequeries.append('"between(fivexfive, 0, 0, 0, 0, 0, 0, 0, 0, 32, 32"')
-    slicequeries.append('"between(fivexfiveoverlap, 0, 0, 0, 0, 0, 0, 0, 0, 32, 32"')
+    slicequeries.append('"between(twoxtwo, 0, 0, 32, 32);"')
+    slicequeries.append('"between(twoxtwooverlap, 0, 0, 32, 32);"')
+    slicequeries.append('"between(threexthree, 0, 0, 0, 0, 32, 32);"')
+    slicequeries.append('"between(threexthreeoverlap, 0, 0, 0, 0, 32, 32);"')
+    slicequeries.append('"between(fivexfive, 0, 0, 0, 0, 0, 0, 0, 0, 32, 32);"')
+    slicequeries.append('"between(fivexfiveoverlap, 0, 0, 0, 0, 0, 0, 0, 0, 32, 32);"')
     for q in cubequeries:
         do_query(q, False)
+    print 'finished slice queries'
 
 #attribute equality queries
     attrqueries = []
     attrqueries.append('"select * from twoxtwo where valnum = 8589934788;"')
     attrqueries.append('"select * from twoxtwooverlap where valnum = 8589934788;"')
     attrqueries.append('"select * from threexthree where valnum = 8589934788;"')
-    attrqueries.append('"select * from threexthreeoverlap valnum = 8589934788;"')
+    attrqueries.append('"select * from threexthreeoverlap where valnum = 8589934788;"')
     attrqueries.append('"select * from fivexfive where valnum = 8589934788;"')
     attrqueries.append('"select * from fivexfiveoverlap where valnum = 8589934788;"')
     for q in attrqueries:
         do_query(q, True)
+    print 'finished attribute queries'
 
 #window aggregate queries
     windowqueries = []
@@ -82,6 +82,8 @@ def run_tests():
     for q in windowqueries:
         do_query(q, True)
 
+    print 'finished window queries'
+
 #group by queries
     groupqueries = []
     groupqueries.append('"select max(valnum) from twoxtwo where j < 10 group by j;"');
@@ -100,6 +102,7 @@ def run_tests():
     groupqueries.append('"select max(valnum) from fivexfiveoverlap where i < 10 group by i;"');
     for q in groupqueries:
         do_query(q, True)
+    print 'finished group queries'
 
 if __name__=='__main__':
     run_tests()
