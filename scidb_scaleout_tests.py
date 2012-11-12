@@ -65,24 +65,24 @@ def run_tests():
 
 #window aggregate queries
     windowqueries = []
-    windowqueries.append('"select avg(valnum) from twoxtwo fixed window as (partition by i 5 preceding and 5 following, j 5 preceding and 5 following);"');
-    windowqueries.append('"select avg(valnum) from twoxtwo fixed window as (partition by i 5 preceding and 5 following, j 5 preceding and 5 following);"');
+    #windowqueries.append('"select avg(valnum) from twoxtwo fixed window as (partition by i 5 preceding and 5 following, j 5 preceding and 5 following);"');
+    #windowqueries.append('"select avg(valnum) from twoxtwo fixed window as (partition by i 5 preceding and 5 following, j 5 preceding and 5 following);"');
     windowqueries.append('"select avg(valnum) from twoxtwooverlap fixed window as (partition by i 0 preceding and 10 following, j 0 preceding and 10 following);"');
     windowqueries.append('"select avg(valnum) from twoxtwooverlap fixed window as (partition by i 0 preceding and 10 following, j 0 preceding and 10 following);"');
 
-    windowqueries.append('"select avg(valnum) from threexthree fixed window as (partition by i 3 preceding and 3 following, j 3 preceding and 3 following, k 3 preceding and 3 following);"');
-    windowqueries.append('"select avg(valnum) from threexthree fixed window as (partition by i 0 preceding and 6 following, j 0 preceding and 6 following, k 0 preceding and 6 following);"');
+    #windowqueries.append('"select avg(valnum) from threexthree fixed window as (partition by i 3 preceding and 3 following, j 3 preceding and 3 following, k 3 preceding and 3 following);"');
+    #windowqueries.append('"select avg(valnum) from threexthree fixed window as (partition by i 0 preceding and 6 following, j 0 preceding and 6 following, k 0 preceding and 6 following);"');
     windowqueries.append('"select avg(valnum) from threexthreeoverlap fixed window as (partition by i 3 preceding and 3 following, j 3 preceding and 3 following, k 3 preceding and 3 following);"');
     windowqueries.append('"select avg(valnum) from threexthreeoverlap fixed window as (partition by i 0 preceding and 6 following, j 0 preceding and 6 following, k 0 preceding and 6 following);"');
 
-    windowqueries.append('"select avg(valnum) from fivexfive fixed window as (partition by i 1 preceding and 1 following, j 1 preceding and 1 following, k 1 preceding and 1 following, l 1 preceding and 1 following, m 1 preceding and 1 following);"');
-    windowqueries.append('"select avg(valnum) from fivexfive fixed window as (partition by i 0 preceding and 2 following, j 0 preceding and 2 following, k 0 preceding and 2 following, l 0 preceding and 2 following, m 0 preceding and 2 following);"');
+    #windowqueries.append('"select avg(valnum) from fivexfive fixed window as (partition by i 1 preceding and 1 following, j 1 preceding and 1 following, k 1 preceding and 1 following, l 1 preceding and 1 following, m 1 preceding and 1 following);"');
+    #windowqueries.append('"select avg(valnum) from fivexfive fixed window as (partition by i 0 preceding and 2 following, j 0 preceding and 2 following, k 0 preceding and 2 following, l 0 preceding and 2 following, m 0 preceding and 2 following);"');
     windowqueries.append('"select avg(valnum) from fivexfiveoverlap fixed window as (partition by i 1 preceding and 1 following, j 1 preceding and 1 following, k 1 preceding and 1 following, l 1 preceding and 1 following, m 1 preceding and 1 following);"');
     windowqueries.append('"select avg(valnum) from fivexfiveoverlap fixed window as (partition by i 0 preceding and 2 following, j 0 preceding and 2 following, k 0 preceding and 2 following, l 0 preceding and 2 following, m 0 preceding and 2 following);"');
-    for q in windowqueries:
-        do_query(q, True)
+    #for q in windowqueries:
+    #    do_query(q, True)
 
-    print 'finished window queries'
+    #print 'finished window queries'
 
 #group by queries
     groupqueries = []
@@ -100,9 +100,9 @@ def run_tests():
     groupqueries.append('"select max(valnum) from fivexfiveoverlap where m < 10 group by m;"');
     groupqueries.append('"select max(valnum) from fivexfive where i < 10 group by i;"');
     groupqueries.append('"select max(valnum) from fivexfiveoverlap where i < 10 group by i;"');
-    for q in groupqueries:
-        do_query(q, True)
-    print 'finished group queries'
+    #for q in groupqueries:
+    #    do_query(q, True)
+    #print 'finished group queries'
 
 if __name__=='__main__':
     run_tests()
