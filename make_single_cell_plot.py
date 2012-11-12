@@ -6,12 +6,15 @@ import csv
 import matplotlib.pyplot as pyplot
 
 parser = argparse.ArgumentParser()
+parser.add_argument('input_file', nargs='?', type=str, action='store')
 parser.add_argument('--output', nargs='?', type=argparse.FileType('w'), dest='output', action='store', help='If specified, the location to save a picture of the plots to.')
 
-# TODO command line switch for input file
 args = parser.parse_args()
 
-f = open('single_cell_select.csv', 'r')
+if input_file in args:
+	f = open(input_file, 'r')
+else:
+	f = open('single_cell_select.csv', 'r')
 reader = csv.reader(f)
 
 data = []
@@ -29,7 +32,7 @@ for row in reader:
 
 fig = pyplot.figure()
 axes = fig.add_subplot(1, 1, 1)
-axes.set_title("Single cell select")
+#axes.set_title("Single cell select")
 axes.set_xlabel("Size of cluster")
 axes.set_ylabel("Time (s)")
 
